@@ -1,0 +1,41 @@
+server:
+  port: 8808
+
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.50.22.100:33060/docker_learn?allowMultiQueries=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&autoReconnect=true&useSSL=false&useUnicode=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: mediav
+  data:
+    redis:
+      host: 172.50.22.100
+      port: 6381
+      password: 1234
+  cache:
+    type: redis
+    cache-names: pc
+
+#mybatis plus相关配置
+mybatis-plus:
+  configuration:
+    #使全局的映射器启用或禁用缓存
+    cache-enabled: false
+    #配置默认的执行器。SIMPLE执行器没有什么特别之处。REUSE执行器重用预处理语句。BATCH执行器重用语句和批量更新
+    default-executor-type: reuse
+    #设置超时时间，它决定驱动等待一个数据库响应的时间
+    default-statement-timeout: 25000
+    #开启驼峰命名转换
+    map-underscore-to-camel-case: true
+  #mapper映射文件路径
+  mapper-locations:
+    - classpath*:mapper/*.xml
+
+logging:
+  pattern:
+    console: level-%-5level - %msg%n
+  level:
+    root: warn
+    docker.ixiao: debug
